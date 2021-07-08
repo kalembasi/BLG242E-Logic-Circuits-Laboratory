@@ -1,1 +1,3 @@
 # BLG242E-Logic-Circuits-Laboratory
+
+Ekin Taşyürek ve Feyza Özen'e teşekkürler...
