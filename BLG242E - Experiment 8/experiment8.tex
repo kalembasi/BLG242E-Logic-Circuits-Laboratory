@@ -1,0 +1,333 @@
+\documentclass[pdftex,12pt,a4paper]{article}
+
+\usepackage{graphicx}  
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{breakcites}
+\usepackage{indentfirst}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+\usepackage{float}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage[cmex10]{amsmath}
+\usepackage{stfloats}
+\usepackage{multirow}
+
+
+\renewcommand{\refname}{REFERENCES}
+\linespread{1.3}
+
+\usepackage{mathtools}
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+\title{Code Listing}
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\usepackage{mathtools}
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\thispagestyle{empty}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\textbf{}\\
+\textbf{\Large{ISTANBUL TECHNICAL UNIVERSITY}}\\
+\vspace{0.5cm}
+\textbf{\Large{COMPUTER ENGINEERING DEPARTMENT}}\\
+\vspace{2cm}
+\textbf{\Large{BLG 242E\\ DIGITAL CIRCUITS LABORATORY\\ EXPERIMENT REPORT}}\\
+\vspace{2.8cm}
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{lcl}
+\textbf{EXPERIMENT NO}  & : & 8 \\
+\textbf{EXPERIMENT DATE}  & : & 21.05.2021 \\
+\textbf{LAB SESSION}  & : & FRIDAY - 14.00 \\
+\textbf{GROUP NO}  & : & G14 \\
+\end{tabular}}
+\end{table}
+\vspace{1cm}
+\textbf{\Large{GROUP MEMBERS:}}\\
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{rcl}
+150180112  & : & ÖMER MALİK KALEMBAŞI \\
+150190014  & : & FEYZA ÖZEN \\
+150190108  & : & EKİN TAŞYÜREK \\
+\end{tabular}}
+\end{table}
+\vspace{2.8cm}
+\textbf{\Large{SPRING 2021}}
+
+\end{center}
+
+\end{titlepage}
+
+\thispagestyle{empty}
+\addtocontents{toc}{\contentsline {section}{\numberline {}FRONT COVER}{}}
+\addtocontents{toc}{\contentsline {section}{\numberline {}CONTENTS}{}}
+\setcounter{tocdepth}{4}
+\tableofcontents
+\clearpage
+
+\setcounter{page}{1}
+
+\section{INTRODUCTION [10 points]}
+In this experiment, we tried to implement three cryptography applications. First, we designed Caesar Cipher which is one of the first examples of cryptography in history. Secondly we implemented the technique  Vigen`ere Cipher which is used by the Confederate Army.
+Finally, we tried to implement the Enigma machine which is used by the German Army in the World War 2 and a sample communication environment will be realized. 
+
+\section{MATERIALS AND METHODS [40 points]}
+
+
+
+\subsection{PART 1}
+In this part, we designed 4 helper modules. 
+
+\begin{itemize}
+\item \textbf{CharDecoder Module}: It transforms ASCII codes of to decoded binary character. It takes 8-bit input which is the ASCII code, gives 26-bit output as decoded char.
+
+\item \textbf{CharEncoder Module}: It transforms the binary decoded version of the char to ASCII code. It takes 26-bit input, gives 8-bit output.
+
+\item \textbf{CircularRightShift Module}: It takes 26-bit input data and 5-bit shiftAmount input, gives 26-bit output. The output is data shifted to the right ‘shiftAmount’ times.
+ 
+\item \textbf{CircularLeftShift Module}: It takes 26-bit input data and 5-bit shiftAmount input, gives 26-bit output. The output is data shifted to the left ‘shiftAmount’ times.
+\end{itemize}
+
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{charDecoder.PNG}	
+	\caption{Char Decoder RTL Schematic}
+	\label{}
+\end{figure}
+
+\clearpage
+\subsection{PART 2}
+In this part, we implemented Caesar Cipher Encryption and Decryption modules. Then we created a Caesar Module to show encrypted and decrypted messages. We created 3 modules here.
+
+\begin{itemize}
+\item \textbf{CaesarEncryption Module}: It works like a shifter and encrypt the char using Caesar Cipher technique.
+
+\item \textbf{CaesarDecryption Module}: It works like a shifter and decrypt the encrypted char using Caesar Cipher technique.
+
+\item \textbf{CaesarEnvironment Module}: It is a module that contains CaesarEncryption and CaesarDecryption modules inside.
+\end{itemize}
+
+
+
+
+\clearpage
+
+\subsection{PART 3}
+In this part, we implemented the Vigen`ere Cipher Encryption and Decryption modules. Then, we created a Vigen`ere Module to show encrypted and decrypted messages. 
+
+\(C_i=(P_i+K_i) mod 26\) is the encryption formula of this method. If Key char is shorter than Plain char, we restart i indexes of Key.
+
+\(D_i=(C_i−K_i) mod 26\) is the decryption formula of this method.
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{VigenereEncryption.PNG}	
+	\caption{Vigen`ere Cipher Encryption RTL Schematic}
+	\label{}
+\end{figure}
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{VigenereDecryption.PNG}	
+	\caption{Vigen`ere Cipher Decryption RTL Schematic}
+	\label{}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{VigenereEnvironment.PNG}	
+	\caption{Vigen`ere Cipher Environment RTL Schematic}
+	\label{}
+\end{figure}
+
+\begin{itemize}
+\item \textbf{VigenereEncryption Module}: It encrypts the char using Vigen`ere Cipher technique. It has 2 char input, one of them is plain char which is going to be encrypted. The other one is key char. It has 1 bit clock and load input that allows registers to work. It gives 8-bit encrypted char output.
+
+\item \textbf{VigenereDecryption Module}: It decrypts the char using Vigen`ere Cipher technique. It has 2 char input, one of them is plain char which is encrypted. The other one is key char. It has 1 bit clock and load input that allows registers to work. It gives 8-bit decrypted char output.
+
+\item \textbf{VigenereEnvironment Module}: It is a module that contains VigenereEncryption  and VigenereDecryption modules inside.
+\end{itemize}
+
+\clearpage
+
+
+\section{RESULTS [15 points]}
+\subsection{PART 1}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{charEncoder_test.PNG}	
+	\caption{Char Encoder Simulation}
+	\label{}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{charDecoder_test.PNG}	
+	\caption{Char Decoder Simulation}
+	\label{}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{circularLeftShift_test.PNG}	
+	\caption{Circular Left Shift Simulation}
+	\label{}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{circularRightShift_test.PNG}	
+	\caption{Circular Right Shift Simulation}
+	\label{}
+\end{figure}
+
+
+
+
+\clearpage
+
+\subsection{PART 2}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{caesarEnvironment_test.PNG}	
+	\caption{Ceaser Environment Simulation}
+	\label{}
+\end{figure}
+
+\clearpage
+
+
+
+
+
+\subsection{PART 3}
+
+\clearpage
+
+
+
+
+
+\section{DISCUSSION [25 points]}
+\textbf{In Part 1}, we implemented 4 modules. These are the codes of the modules that we designed in this part. Circular Left Shift and Right Shift are similar. 
+
+\begin{lstlisting}[language=Verilog, caption=CharDecoder]
+    always @(*) begin
+        tempDecoded=26'd0;
+
+        for (k=0; k<8; k=k+1)begin
+            x=x+tempChar[k]*y;
+            y=y*2;
+        end
+        tempDecoded[x]=1;
+    end
+
+    assign decodedChar=tempDecoded;
+\end{lstlisting}
+We used an always block and transformend char to decoded char here. It transforms ASCII codes of to decoded binary character. \\
+
+
+\begin{lstlisting}[language=Verilog, caption=CharEncoder]
+ always@(*)begin
+        k=0;
+        tempChar=8'd0;
+
+        for(k=0; k<26; k=k+1)begin
+            if(decodedChar[k]==1)begin
+                x=k;
+            end
+        end
+        k=0;
+
+        while(x!=0)begin
+            if(x%2==1)begin
+                tempChar[k]=1;
+            end
+
+            k=k+1;
+            x=x/2;
+        end
+    end
+
+    assign char=tempChar;
+  
+\end{lstlisting}
+We used an always block and transformend decoded char to encoded char. It transforms the binary decoded version of the char to ASCII code.\\
+
+\begin{lstlisting}[language=Verilog, caption=CircularRightShift]
+ CharEncoder CE(data, tempData);
+
+    always @(*) begin
+        k=tempData;
+        k=k-shiftAmount;
+
+        while(k<65)begin
+            k=k+1;
+        end
+    end
+
+    CharDecoder CD(k,out);
+
+\end{lstlisting}
+This code does shifting by taking shiftAmount. 65 is the difference between ASCII code of a char and its index.\\
+
+
+
+
+\textbf{In Part 2}, we implemented 3 modules: CaesarEncryption, CaesarDecryption and CaesarEnvironment. In CaesarEncryption module, we have 2 inputs -plainChar and shiftCount- and 1 output -chipherChar-. First, we use CharDecoder module and decode plainChar. Then, we use CircularRightShift module and shift our decoded char to right. Lastly, we encode our decoded char with CharEncoder module. CaesarDecryption module does almost the same thing as the CaesarEncryption module; but instead of shifting right, it shifts left using CircularLeftShift module. In CaesarEnvironment module, we have 2 inputs -plainChar and shiftCount- and 2 outputs -chipherChar and decryptedChar-. We use both CaesarEncryption and CaesarDecryption in this module. The output of the CaesarEncryption is chipherChar and the output of CaesarDecryption is decryptedChar.\\
+
+
+\textbf{In Part 3}, we implemented 3 modules: VigenereEncryption, VigenereDecryption and VigenereEnvironment. In VigenereEncryption module, we have 4 inputs -plainChar, keyInput, LOAD and CLK- and 1 output -chipherChar-. We use “Ci = (Pi + Ki) mod 26”  equation to calculate chipherChar if LOAD is 0. If LOAD is 1, it loads the keyInput into keyRegister. VigenereDecryption module does almost the same thing as the VigenereEncryption; but it uses a different equation to calculate decryptedChar ,“Di = (Ci − Ki) mod 26”. In VigenereEnvironment module we have 2 inputs, the output of the VigenereEncryption is chipherChar and the output of VigenereDecryption is decryptedChar.
+
+
+
+
+\section{CONCLUSION [10 points]}
+It was more fun to do this homework compared to previous assignments. In this experience, we learned about different types of cryptography applications: Caesar Cipher and Vigenere Cipher. We also learned how to use for and while modules. Unfortunately, we didn’t have enough time to complete Part 4. In some parts, we could not get RTL schematics and simulation results. So we could not put them in report.
+
+
+\end{document}
+

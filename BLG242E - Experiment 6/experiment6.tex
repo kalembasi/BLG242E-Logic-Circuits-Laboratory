@@ -1,0 +1,302 @@
+\documentclass[pdftex,12pt,a4paper]{article}
+
+\usepackage{graphicx}  
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{breakcites}
+\usepackage{indentfirst}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+\usepackage{float}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage[cmex10]{amsmath}
+\usepackage{stfloats}
+\usepackage{multirow}
+
+\renewcommand{\refname}{REFERENCES}
+\linespread{1.3}
+
+\usepackage{mathtools}
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\thispagestyle{empty}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\textbf{}\\
+\textbf{\Large{ISTANBUL TECHNICAL UNIVERSITY}}\\
+\vspace{0.5cm}
+\textbf{\Large{COMPUTER ENGINEERING DEPARTMENT}}\\
+\vspace{2cm}
+\textbf{\Large{BLG 242E\\ DIGITAL CIRCUITS LABORATORY\\ EXPERIMENT REPORT}}\\
+\vspace{2.8cm}
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{lcl}
+\textbf{EXPERIMENT NO}  & : & 6 \\
+\textbf{EXPERIMENT DATE}  & : & 30.04.2021 \\
+\textbf{LAB SESSION}  & : & FRIDAY - 14.00 \\
+\textbf{GROUP NO}  & : & G14 \\
+\end{tabular}}
+\end{table}
+\vspace{1cm}
+\textbf{\Large{GROUP MEMBERS:}}\\
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{rcl}
+150180112  & : & ÖMER MALİK KALEMBAŞI \\
+150190014  & : & FEYZA ÖZEN \\
+150190108  & : & EKİN TAŞYÜREK \\
+\end{tabular}}
+\end{table}
+\vspace{2.8cm}
+\textbf{\Large{SPRING 2021}}
+
+\end{center}
+
+\end{titlepage}
+
+\thispagestyle{empty}
+\addtocontents{toc}{\contentsline {section}{\numberline {}FRONT COVER}{}}
+\addtocontents{toc}{\contentsline {section}{\numberline {}CONTENTS}{}}
+\setcounter{tocdepth}{4}
+\tableofcontents
+\clearpage
+
+\setcounter{page}{1}
+
+\section{INTRODUCTION [10 points]}
+In this experiment, we implemented data buses and basic memory by using three-state. buffers.
+
+\section{MATERIALS AND METHODS [40 points]}
+
+
+
+\subsection{PART 1}
+In this part, we implemented an 8-bit bus by using three-state buffers. Firstly, we designed a three-state buffer. The Verilog code of the TSB module is shown in Figure1. A three-state buffer is a circuit component that allows input to be transferred into output when Enable input is 1. When Enable is 0, the output is high-impedance. In the code(Figure 1), A is 8-bit input data, E is Enable input, and Z is high-impedance. RTL Schematic of the three-state buffer is shown in Figure 2.
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.3\textwidth]{tsb_code.png}	
+	\caption{Three-State Buffer Module}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{tsb_rtl.jpeg}	
+	\caption{Three-State Buffer RTL Schematic}
+	\label{fig1}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{part1_circuit.png}	
+	\caption{8-bit data bus with 2 drivers with 3-state buffers}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{part1 (1).PNG}	
+	\caption{Part 1 RTL Schematic}
+	\label{fig1}
+\end{figure}
+
+
+
+
+\clearpage
+
+\subsection{PART 2}
+
+In this part, we implemented the circuit given in Figure 5. This circuit contains a bus with two distinct outputs and inputs.
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{part2_circuit.png}	
+	\caption{8-bit data bus with 2 drivers and 2 readers}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{part2 (1).PNG}	
+	\caption{Part 2 RTL Schematic}
+	\label{fig1}
+\end{figure}
+
+
+
+\clearpage
+
+\subsection{PART 3}
+In this part, we implemented an 8-bit memory line module. This module takes 8-bit data as input. It also takes reset, line select, read enable, write enable, and clock inputs for some operations. It gives 8-bit data as output. Also, the module should take  Required operations are given below. 
+
+When the clock signal is on the rising edge, Enable and Line Select inputs are high, the module stores the data value.
+
+When the reset signal is on the falling edge, the module clears the stored data.
+
+When read enable and line select inputs are high, the output of the module stores the data. Otherwise, the output is high impedance.
+
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{part3 (1).PNG}	
+	\caption{Part 3 RTL Schematic}
+	\label{fig1}
+\end{figure}
+
+
+\clearpage
+
+\subsection{PART 4}
+In this part, we implemented an 8-byte memory module using an 8-bit memory line module. 8-byte memory module takes 8-bit data, 3-bit address, chip select, reset, read enable, write enable, and clock as input and gives 8-bit data as output.  When the chip select input is high, the Nth memory line is selected. When the Write Enable input is high and the clock signal is at the rising edge, the selected memory line stores the data. Reset signal provides to clear stored data in the memory lines at its falling edge. When Read Enable is high, the output of the module is the data of the selected memory line.
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\textwidth]{part4 (1).PNG}	
+	\caption{Part 4 RTL Schematic}
+	\label{fig1}
+\end{figure}
+
+
+
+\clearpage
+
+\subsection{PART 5}
+In this part, we implemented a 32 byte memory module using 8 byte memory module. The Memory module takes 8-bit data,  5-bit address, reset, read enable, write enable, and clock signal as input and gives 8-bit data as output. 2 bits of the address input are used for chip selection and the rest bit is used for selecting line. 
+
+When the clock is at rising edge and Write Enable is high, the selected memory line stores the input data value. When read enable is high, the output of the module is the stored data of the selected memory line. Also, there is a reset input that clears stored data in the memory modules when it is at its falling edge.
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\textwidth]{part5 (1).PNG}	
+	\caption{Part 5 RTL Schematic}
+	\label{fig1}
+\end{figure}
+
+
+
+\clearpage
+
+\subsection{PART 6}
+In this part, we implemented a 128-byte memory module using 32-byte memory module that we implemented before in part5. The memory module takes 32-bit, address, reset, read enable, write enable, and clock as inputs; and gives 32-bit data as output. 
+
+When the clock signal is at the rising edge and write enable is high, the selected memory line stores the input data. When read enable is high the output of the module is the stored data of the selected memory line.  Also, there is a reset input that clears stored data in the memory modules when it is at its falling edge.
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{part6.png}	
+	\caption{Part 6 RTL Schematic}
+	\label{fig1}
+\end{figure}
+
+
+
+\clearpage
+
+
+
+\section{RESULTS [15 points]}
+\subsection{PART 1}
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\textwidth]{tsb_test.PNG}	
+	\caption{TSB Simulation}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\textwidth]{part1_test.PNG}	
+	\caption{Part 1 Simulation}
+	\label{fig1}
+\end{figure}
+
+
+
+
+\subsection{PART 2}
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\textwidth]{part2_test.PNG}	
+	\caption{Part 2 Simulation}
+	\label{fig1}
+\end{figure}
+
+
+
+
+
+
+\subsection{PART 3}
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\textwidth]{part3_test.PNG}	
+	\caption{Part 3 Simulation}
+	\label{fig1}
+\end{figure}
+\clearpage
+
+
+
+\subsection{PART 4}
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\textwidth]{part4_test.PNG}	
+	\caption{Part 4 Simulation}
+	\label{fig1}
+\end{figure}
+
+
+
+
+
+\subsection{PART 5}
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\textwidth]{part5_test.PNG}	
+	\caption{Part 5 Simulation}
+	\label{fig1}
+\end{figure}
+
+
+\subsection{PART 6}
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\textwidth]{part6_sim.PNG}	
+	\caption{Part 6 Simulation}
+	\label{fig1}
+\end{figure}
+
+\clearpage
+
+\section{DISCUSSION [25 points]}
+\textbf{In Part 1}, we implemented an 8-bit bus by using three-state buffers. In our code, there are 2 8-bit data inputs named  \(D_1\) and \(D_2\). We tested the output using some test cases. Some of them are; \(D_1\)=3 \(D_2\)=2, \(D_1\)=4 \(D_2\)=7. There are also a 1-bit select input S and 8-bit output out, in the code. When S is 1,  \(D_2\) is selected. When S is 0,  \(D_1\) is selected. The simulation results are the same as what we expected from the circuit.\\
+
+\textbf{In Part 2},  we implemented the circuit given in Figure 5. In our code, there are 2 8-bit data inputs named  \(D_1\) and \(D_2\). We tested the output using some test cases. Some of them are; \(D_1\)=3 \(D_2\)=2, \(D_1\)=4 \(D_2\)=7. There are also a 1-bit select input S and 2 8-bit output out1 out2, in the code. When S is at the falling edge, out1 equals \(D_1\). When S is at the rising edge, out2 equals \(D_2\).\\
+
+\textbf{In Part 3}, we implemented an 8-bit memory line module. In our code, there is an 8-bit data input named D. There are also reset input R, line select LS, read enable RE, write enable WE, and the clock signal CLK. The 8-bit output is named out. We used always block to operate the cases that we need to implement. The first always block is active at the rising edge of the clock signal CLK. We made the circuit to load data D to loaded value, when write enable and line select is 1. The second always block is active at the negative edge of the reset signal R. It resets the loaded value and makes it 0. The third always block is active in "else" situation. If Read Enable and Line Select are 1, loaded value loads to out.\\
+
+\textbf{In Part 4}, we implemented an 8-byte memory module using an 8-bit memory line module. In our code, there is an 8-bit data input named D. There are also reset input R, line select LS, read enable RE, write enable WE, and the clock signal CLK. The 8-bit output is named out. There are 2 more extra input variables that are chip select CS and 2-bit address A. We used 1 always block and switch case block. The code works when CS equals 1. The code selects and loads the output according to address A. Also, we have an "else" situation that makes output 0.\\
+
+\textbf{In Part 5}, we implemented a 32-byte memory module using 8-byte memory modules. In our code, there is an 8-bit data input named D. There are also reset input R, line select LS, read enable RE, write enable WE, and the clock signal CLK. The 8-bit output is named out. There is 5-bit address input A. Its first 2 digit is for chip selection, last 3 digit is for line selection. We used the 8-bit memory line module 4 times to get a 32-bit memory module. We used always and switch-case blocks. The switch case works with the first 2 digits of A. Then, loads needed data to out.\\
+
+\textbf{In Part 6}, we implemented a 128-byte memory module. We have 6 inputs: 32-bit D for data, 5-bit A for address (first 2 bit is for chip selection, last 3 bit is for line selection), R for reset, RE for read-enable, WE for write-enable, CLK for clock. We used 16 different 32-byte memory modules. We used 4 32-byte memory modules to represent each 32 line because the module memory\_32byte has 8-bit input and output. We used case blocks for chip selection just like we did in Part 5. 
+In our test benches for Part 6, we firstly wrote 20 to line 3 (00101:first chip, third line). Then we read the 3rd line. Secondly we wrote 1 to line 3 again and read it. Then we wrote 7 to line 34 (01001:second chip, second line) and read the 34th line. We then wrote 13 and 4 to the 34th line again and read them. After that, we respectively wrote 6, 5 and 11 to line 8 (00111: first chip, eighth line) and read them.
+
+
+
+
+\section{CONCLUSION [10 points]}
+In this experiment we learned to implement data bus using three-state buffer and create memory modules in Verilog. Also we learned some syntactic properties of Verilog, such as switch case. We used negedge for the first time.
+
+
+
+\end{document}
+

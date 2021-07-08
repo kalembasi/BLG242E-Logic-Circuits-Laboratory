@@ -1,0 +1,395 @@
+\documentclass[pdftex,12pt,a4paper]{article}
+
+\usepackage{graphicx}  
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{breakcites}
+\usepackage{indentfirst}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+\usepackage{float}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage[cmex10]{amsmath}
+\usepackage{stfloats}
+\usepackage{multirow}
+
+\renewcommand{\refname}{REFERENCES}
+\linespread{1.3}
+
+\usepackage{mathtools}
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\thispagestyle{empty}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\textbf{}\\
+\textbf{\Large{ISTANBUL TECHNICAL UNIVERSITY}}\\
+\vspace{0.5cm}
+\textbf{\Large{COMPUTER ENGINEERING DEPARTMENT}}\\
+\vspace{2cm}
+\textbf{\Large{BLG 242E\\ DIGITAL CIRCUITS LABORATORY\\ EXPERIMENT REPORT}}\\
+\vspace{2.8cm}
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{lcl}
+\textbf{EXPERIMENT NO}  & : & 1 \\
+\textbf{EXPERIMENT DATE}  & : & 19.03.2021 \\
+\textbf{LAB SESSION}  & : & FRIDAY - 14.00 \\
+\textbf{GROUP NO}  & : & G14 \\
+\end{tabular}}
+\end{table}
+\vspace{1cm}
+\textbf{\Large{GROUP MEMBERS:}}\\
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{rcl}
+150180112  & : & ÖMER MALİK KALEMBAŞI \\
+150190014  & : & FEYZA ÖZEN \\
+150190108  & : & EKİN TAŞYÜREK \\
+\end{tabular}}
+\end{table}
+\vspace{2.8cm}
+\textbf{\Large{SPRING 2021}}
+
+\end{center}
+
+\end{titlepage}
+
+\thispagestyle{empty}
+\addtocontents{toc}{\contentsline {section}{\numberline {}FRONT COVER}{}}
+\addtocontents{toc}{\contentsline {section}{\numberline {}CONTENTS}{}}
+\setcounter{tocdepth}{4}
+\tableofcontents
+\clearpage
+
+\setcounter{page}{1}
+
+\section{INTRODUCTION [10 points]}
+In this experiment, we implemented AND, OR, and NOT gates by using Vivado. With this experiment, we aimed to show the axioms and theorems of boolean algebra. 
+
+
+
+\section{MATERIALS AND METHODS [40 points]}
+
+
+
+\subsection{PART 1}
+
+In this part, we used Verilog operators such as ‘\&’ (Bitwise AND), ‘\(|\)’ (Bitwise OR), and ‘\(\sim\)’ (Bitwise NOT) operations to implement AND, OR, and NOT Gates.  \\
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{and.jpg}	
+	\caption{AND Gate RTL Schematic}
+	\label{fig1}
+\end{figure}\\
+\\
+\\
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{or.jpg}	
+	\caption{OR Gate RTL Schematic}
+	\label{fig2}
+	
+\end{figure}\\
+\\
+\\
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{not.jpg}	
+	\caption{NOT Gate RTL Schematic}
+	\label{fig3}
+
+\end{figure}
+
+\clearpage
+
+
+\subsection{PART 2}
+In this part, we implemented \(F_1\)  and \(F_2\) expressions by using AND, OR, NOT modules which we designed in the first part. We tested our implementations by giving them input combinations and use the combinations in a simulation on Vivado.
+\\
+
+\[F_1(a,b)=a+a·b=a \]
+
+Proof of the equality: 
+\\
+
+\begin{tabular}{rcl}
+\(a + a · b = a \)  &  & Original equation \\
+\(a . 1 + a . b = a  \)  &  & Identity \\
+\(a . (1 + b) = a\)  &  & Distributivity \\
+\(a . 1 = a \)  &  & Identity \\
+\(a = a \)  &  & Identity \\
+\end{tabular}
+
+\[F_2(a,b)=(a+b)·(a+b')=a\]
+
+Proof of the equality: 
+\\
+
+\begin{tabular}{rcl}
+\((a + b) · (a + b’ ) = a\)  &  & Original equation \\
+\(a + (b . b’) = a \)  &  & Distributivity \\
+\(a + 0 = a \)  &  & Complement \\
+\(a = a\)  &  & Identity \\
+\end{tabular}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{part2_1.PNG}	
+	\caption{\(F_1\) RTL Schematic}
+	\label{fig4}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{part2_2.PNG}	
+	\caption{\(F_2\) RTL Schematic}
+	\label{fig5}
+\end{figure}
+
+\clearpage
+
+\subsection{PART 3}
+In this part, we determined the dual of the theorem and then, implemented the functions for both sides of the dual theorem using AND, OR, NOT modules that we designed in the first part. \\
+\\
+Theorem : \((a+a·b=a)\)\\
+\\
+The dual of a Boolean expression is the expression one obtains by interchanging addition and multiplication and interchanging 0's and 1's.\\
+\\
+Dual of \(a + a · b = a\) is \( a . (a + b) = a\).\\
+
+\begin{tabular}{rcl}
+\(a . (a + b) = a\)& &Original equation\\
+\(a . a + a . b = a \)& &Distributivity\\
+\(a + a . b = a \)& &Idempotency\\
+\end{tabular}
+
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{part3_1.PNG}	
+	\caption{\(a + a · b = a\) RTL Schematic}
+	\label{fig6}
+\end{figure}
+
+\begin{figure}[ht]	
+	\centering
+	\includegraphics[width=0.7\textwidth]{part3_2.PNG}	
+	\caption{\( a . (a + b) = a\) RTL Schematic}
+	\label{fig7}
+\end{figure}
+
+
+\clearpage
+
+\subsection{PART 4}
+
+In this part, we determined the complement of \(F_3\), then implemented the circuit using AND, OR, NOT modules that we designed in the first part. 
+
+\[F_3(a, b, c) = a · b + a' · c \]
+
+Complementary of function \(F = a · b + a’ · c\) is  \(F’ = (a’ + b’) . (a + c’)\), De Morgan theorem was used to calculate this expression.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{part4.PNG}	
+	\caption{\(F'_3\) RTL Schematic}
+	\label{fig9}
+	
+\end{figure}
+\clearpage
+\subsection{PART 5}
+
+In this part, we implemented the simplified expression of  \(F_4\) using AND, OR, NOT modules that we designed in the first part. 
+\[F_4(a,b,c,d) = U_1(1,2,5,6,9,10,13,14)\]
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.3\textwidth]{table.png}	
+	\caption{Karnaugh Map of \(F_4\)}
+	\label{fig10}
+	
+\end{figure}
+
+According to the table, the simplified equation is 
+\(F_4 = c . d’ + c’ . d\)
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{part5.PNG}	
+	\caption{\(F_4\) RTL Schematic}
+	\label{fig11}
+	
+\end{figure}
+
+\clearpage
+
+\section{RESULTS [15 points]}
+\subsection{PART 1}
+In this part, we implemented AND, OR, and NOT gates. The simulation results show that we made them correctly.
+
+\subsubsection{AND GATE}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{andgate_sim.PNG}	
+	\caption{AND gate simulation}
+	\label{fig14}
+\end{figure}
+
+\subsubsection{OR GATE}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{orgate_sim.PNG}	
+	\caption{OR gate simulation}
+	\label{fig17}
+\end{figure}
+\subsubsection{NOT GATE}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{notgate_sim.PNG}	
+	\caption{NOT gate simulation}
+	\label{fig18}
+\end{figure}
+
+\clearpage
+\subsection{PART 2}
+In this part, we showed that \(F_1\) and \(F_2\) are equal to a by implementing them using AND, OR, NOT gate we designed in the first part. In  \(F_1\), when a is 0, the output is 0 regardless of what b is. Also, when b is 1, the output is 1 regardless of what b is. That shows the validness of the theorem. The results are the same for both \(F_1\) and \(F_2\).
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{part2_1_sim.PNG}	
+	\caption{\(F_1\) simulation}
+	\label{fig12}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{part2_2_sim.PNG}	
+	\caption{\(F_2\) simulation}
+	\label{fig13}
+\end{figure}
+\clearpage
+
+
+
+
+
+\subsection{PART 3}
+In this part, we showed that the dual of an expression is the same as the original expression. Theorem is \((a+a·b=a)\). When a is 0 and b regardless of b, the output is equal to 0. When a is 1 and b regardless of b, the output is equal to 1. Dual of the theorem is \( a . (a + b) = a\). When a is 0 and b regardless of b, the output is equal to 0. When a is 1 and b regardless of b, the output is equal to 1. That proves our expectations about the equality of dual expressions. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{part3_1_sim.PNG}	
+	\caption{\(F_3\) simulation}
+	\label{fig14}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{part3_2_sim.PNG}	
+	\caption{\(F'_3\) simulation}
+	\label{fig15}
+\end{figure}
+\clearpage
+
+
+
+\subsection{PART 4}
+In this part, we showed that the simulation results are the same as the truth table we made.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.3\textwidth]{truth_table_4.jpeg}	
+	\caption{Truth table for \(F_3\) and \(F'_3\)}
+	\label{fig8}
+	
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{part4_simm.jpeg}	
+	\caption{\(F'_3\) simulation}
+	\label{fig15}
+\end{figure}
+
+\clearpage
+\subsection{PART 5}
+In this part, we used the simplified expression that we got from the Karnaugh map. When c and d are 0, the output is 0. When c is 0 and d is 1, the output is 1. When c is 1 and d is 0, the output is 1. When c and d are 1, the output is 0. The simulation results are the same as what we expected.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{part5_sim.PNG}	
+	\caption{\(F_4\) simulation}
+	\label{fig16}
+\end{figure}
+
+
+
+
+\section{DISCUSSION [25 points]}
+\textbf{In Part 1}, we implemented AND, OR, NOT modules to use in the following parts. A, B are the input variables and C is the output variable.\\
+
+\begin{tabular}{rcl}
+\(C = A \& B\) & & equation used for AND gate\\
+\(C = A | B\)  & & equation used for OR gate\\
+\(C = \sim A\) & & equation used for NOT gate\\
+\end{tabular}\\
+\\
+\\
+\textbf{In Part 2}, we had two expressions:\(F_1(a, b) = a + a · b = a \) and \( F_2(a, b) = (a + b) · (a + b 0 ) = a\). Firstly, we proved the equalities using the axioms of Boolean algebra. Then, using the gate modules we implemented in Part 1, we designed the expressions as logic circuits. Our code looked like;
+
+
+\begin{verbatim}
+andgate AND1(.input1(input1), .input2(input2), .out(araKablo1));
+orgate OR1(.input1(input1), .input2(araKablo1), .out(out));
+\end{verbatim}
+
+We defined the result of the AND gate as araKablo1 (a.b) and used it as a input in the OR gate. The result of our OR gate was as expected: \(a+a.b\) . After implementing the expressions, we prepared test cases for them with every possible input and checked their correctness.\\
+
+\textbf{In Part 3}, we have the equality \(a + a · b = a\). First, we determined its dual as \(a . (a + b) = a\). We proved it using Boolean algebra and checked its correctness. Then, again using the gate modules from the Part 1, we implemented the circuit. Our code looked like; 
+
+\begin{verbatim}
+orgate OR1(.input1(input1), .input2(input2), .out(araKablo1)); 
+andgate AND1(.input1(input1), .input2(araKablo1), .out(out)); 
+\end{verbatim}
+
+The OR gate summed our two inputs (a+b). The AND gate multiplied the result of the OR gate with our first input(a) and the final result was a(a+b) . After implementing the expressions, we prepared test cases for them with every possible input and checked their correctness.\\
+
+\textbf{In Part 4}, we had the function \(F_3(a, b, c) = a · b + a’ . c \). Firstly, we calculated its complementary (F’3) using De Morgan theorem as \(F’_3 = (a’ + b’) . (a + c’)\). Afterwards, we validate our expressions using a truth table. Then, again using the gate modules from the Part 1, we implemented the circuit. Our code looked like;\\
+
+\begin{verbatim}
+notgate NOT1(.input1(input1), .out(araKablo1)); 
+notgate NOT2(.input1(input2), .out(araKablo2)); 
+notgate NOT3(.input1(input3), .out(araKablo1)); 
+orgate OR1(.input1(araKablo1), .input2(araKablo2), .out(araKablo4)); 
+orgate OR2(.input1(input1), .input2(araKablo3), .out(araKablo5));
+andgate AND1(.input1(araKablo4), .input2(araKablo5), .out(out)); 
+\end{verbatim}
+
+To use the results of the gates in another gate, we defined wires. After implementing the expression, we prepared test cases for it with every possible input and checked its correctness.\\
+
+\textbf{In Part 5}, we were given a logical function: \(F(a, b, c, d) = ∪1(1, 2, 5, 6, 9, 10, 13, 14)\). First, we simplified the function using a Karnaugh map. Our simplified expression was \(F = c . d’ + c’ . d\). Then, again using the gate modules from the Part 1, we implemented the circuit. Our code looked like; 
+
+\begin{verbatim}
+notgate NOT1(.input1(input1), .out(araKablo1)); 
+notgate NOT2(.input1(input2), .out(araKablo2)); 
+andgate AND1(.input1(input1), .input2(araKablo2), .out(araKablo3)); 
+andgate AND2(.input1(araKablo1), .input2(input2), .out(araKablo4)); 
+orgate OR1(.input1(araKablo3), .input2(araKablo4), .out(out));  
+\end{verbatim}
+
+Since our simplified expression had only c and d variables in it, we didn’t use the a and b variables and defined only two inputs. After implementing the expression, we prepared test cases for it with every possible input and checked its correctness.
+
+
+\section{CONCLUSION [10 points]}
+We faced lots of difficulties while making this experiment. We tried to install Xilinx Vivado but it was a problem that to use the software in macOS. Then we tried to learn how to use the software and how to code.
+It was a problem that creating files separate for each module, at the beginning of the experiment.  We had to restart the software to start to experiment again a few times. We did not face any difficulty while coding the modules. But test files were quite hard to code. Especially we could not learn correct syntax fast.
+
+In conclusion, we learned how to use Xilinx Vivado and how to code in Verilog. Then, we learned how to code basic logic gate modules such as AND, OR, NOT and implement them into logical expressions. 
+
+
+
+\end{document}
+

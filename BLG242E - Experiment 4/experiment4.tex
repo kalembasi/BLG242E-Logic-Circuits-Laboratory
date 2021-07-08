@@ -1,0 +1,394 @@
+\documentclass[pdftex,12pt,a4paper]{article}
+
+\usepackage{graphicx}  
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{breakcites}
+\usepackage{indentfirst}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+\usepackage{float}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage[cmex10]{amsmath}
+\usepackage{stfloats}
+\usepackage{multirow}
+
+\renewcommand{\refname}{REFERENCES}
+\linespread{1.3}
+
+\usepackage{mathtools}
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\thispagestyle{empty}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\textbf{}\\
+\textbf{\Large{ISTANBUL TECHNICAL UNIVERSITY}}\\
+\vspace{0.5cm}
+\textbf{\Large{COMPUTER ENGINEERING DEPARTMENT}}\\
+\vspace{2cm}
+\textbf{\Large{BLG 242E\\ DIGITAL CIRCUITS LABORATORY\\ EXPERIMENT REPORT}}\\
+\vspace{2.8cm}
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{lcl}
+\textbf{EXPERIMENT NO}  & : & 4 \\
+\textbf{EXPERIMENT DATE}  & : & 09.04.2021 \\
+\textbf{LAB SESSION}  & : & FRIDAY - 14.00 \\
+\textbf{GROUP NO}  & : & G14 \\
+\end{tabular}}
+\end{table}
+\vspace{1cm}
+\textbf{\Large{GROUP MEMBERS:}}\\
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{rcl}
+150180112  & : & ÖMER MALİK KALEMBAŞI \\
+150190014  & : & FEYZA ÖZEN \\
+150190108  & : & EKİN TAŞYÜREK \\
+\end{tabular}}
+\end{table}
+\vspace{2.8cm}
+\textbf{\Large{SPRING 2021}}
+
+\end{center}
+
+\end{titlepage}
+
+\thispagestyle{empty}
+\addtocontents{toc}{\contentsline {section}{\numberline {}FRONT COVER}{}}
+\addtocontents{toc}{\contentsline {section}{\numberline {}CONTENTS}{}}
+\setcounter{tocdepth}{4}
+\tableofcontents
+\clearpage
+
+\setcounter{page}{1}
+
+\clearpage
+\section{INTRODUCTION [10 points]}
+
+In this experiment, we implemented and examined data storage elements: latches and flip-flops using Verilog. 
+
+A flip flop is an electronic sequential circuit that stores data with its two stable states. They have inputs that can change the stored data. A flip flop works with the control of a clock signal. The clock signal decides when the flip flop changes its state. Flip flops are used in designing storage devices, registers, and counters.
+
+Flip flops work with a clock signal, unlike latches. Latches can change their output immediately when an input is applied. Also, a latch can be considered as the building block of a flip flop.
+
+
+
+\section{MATERIALS AND METHODS [40 points]}
+
+
+
+\subsection{PART 1}
+
+In this part, we implemented an SR Latch module with S and R inputs and with Q and \((Q_N)\) outputs without an Enable input using NAND Gates. An S-R (Set-Reset) latch is a latch consists of 2 NOR or 2 NAND gates. It has two inputs, one set (S), and one reset (R).  It has two outputs, one is output (Q) and one is complemented output \((Q_N)\). S input sets the output, and R input resets output. When S is 1 and R is 0, the output is 1. The output will not change when the value of S changes from 1 to 0. The value of R must be set to 1 for output to be 0. Again, the output will not change when the value of R changes from 1 to 0. S and R can not be 1 at the same time. Because this condition causes errors such as Q and N being 1  or being 0 at the same time. This is impossible as they are supposed to be opposite. Figure 1 shows the truth tables of an SR latch. 
+
+
+\begin{table}[h!]
+\begin{tabular}{|c|c|c|c|}
+\hline
+S & R & Q(t+1)    & Q'(t+1)   \\ \hline
+1 & 0 & 1         & 0         \\ \hline
+0 & 0 & 1         & 0         \\ \hline
+0 & 1 & 0         & 1         \\ \hline
+0 & 0 & 0         & 1         \\ \hline
+1 & 1 & forbidden & forbidden \\ \hline
+
+\end{tabular}
+\caption{\label{tab:table-name}}
+\end{table}
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{SR_Kmap.jpg}	
+	\caption{SR Latch Truth Table and Karnaugh Map}
+	\label{fig1}
+\end{figure}
+
+
+
+
+
+\textbf{Karnaugh Map Results:}
+
+2,3,6,7: \(S\)
+
+4,6: \(R'•Q(t)\)
+
+\textbf{Characteristics equation of SR Latch:}
+
+\(Q (t+1) = S + R'•Q(t)\)
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{part1.PNG}	
+	\caption{RTL Schematic of SR Latch}
+	\label{fig2}
+\end{figure}
+
+
+
+\clearpage
+
+
+\subsection{PART 2}
+In this part, we implemented an SR Latch module with an Enable input using 2 NAND Gates.  When Enable is 0, the output is the same as the previous output. When Enable is 1, outputs are the same as an SR Latch that has no Enable input. Figure 4 shows the truth tables of an SR latch with Enable.
+
+\begin{table}[h!]
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+E                       & S & R & Q(t+1)    & Q'(t+1)   \\ \hline
+\multicolumn{1}{|c|}{0} & X & X & Q(t)      & Q'(t)     \\ \hline
+1                       & 1 & 0 & 1         & 0         \\ \hline
+1                       & 0 & 0 & 1         & 0         \\ \hline
+1                       & 0 & 1 & 0         & 1         \\ \hline
+1                       & 0 & 0 & 0         & 1         \\ \hline
+1                       & 1 & 1 & forbidden & forbidden \\ \hline
+\end{tabular}
+\caption{\label{tab:table-name}}
+\end{table}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{SR_Kmap_Enable.jpg}	
+	\caption{SR Latch with Enable Input Truth Table and Karnaugh Map}
+	\label{fig3}
+\end{figure}
+
+\textbf{Karnaugh Map Results:}
+
+4,5,6,7: \(En' \cdot Q(t)\)
+
+4,6,12,14: \(Q(t) \cdot R'\)
+
+10,11,14,15: \(En \cdot S\)
+
+\textbf{Characteristics equation of SR Latch with Enable:}
+
+\(Q (t+1) = En' \cdot Q(t) + Q(t) \cdot R' + En \cdot S\)
+
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{part2.PNG}	
+	\caption{RTL Schematic of SR Latch with Enable}
+	\label{fig4}
+\end{figure}
+
+\clearpage
+
+
+\subsection{PART 3}
+In this part, we implemented a positive edge triggered D flip-flop module with D input and Q - Q' outputs. We used a clock signal to make D Flip Flop positive edge triggered. A D Flip Flop takes the input when an edge rises and delays it by one clock cycle.  The output is the same as the input in the rising edge. D means delay.
+
+\begin{table}[h!]
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{CLK} & D & Q(t+1) & Q'(t+1) \\ \hline
+Rising Edge               & 0 & 0      & 1       \\ \hline
+Rising Edge               & 1 & 1      & 0       \\ \hline
+0                         & X & Q(t)   & Q'(t)   \\ \hline
+1                         & X & Q(t)   & Q'(t)   \\ \hline
+\end{tabular}
+\caption{\label{tab:table-name}}
+\end{table}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.65\textwidth]{part3_Dlatch.PNG}	
+	\caption{RTL Schematic of D Latch}
+	\label{fig5}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.65\textwidth]{part3_Dflipflop.PNG}	
+	\caption{RTL Schematic of D Flip Flop}
+	\label{fig6}
+\end{figure}
+
+\clearpage
+
+\subsection{PART 4}
+In this part, we implemented a positive edge triggered pulse generator using a circular shift register. The circuit takes 16-bit input for the loaded value, 1-bit input for the clock signal, 1-bit input for the load flag and gives 1-bit output. Shift registers are sequential logic circuits that can be used when transfering or storing binary data. It loads the data present on its inputs and then moves it to the left or right once every clock cycle. If LOAD is 1, the inputs are loaded into flip-flops. If LOAD is 0, the data in the flip-flops are shifted.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{parrt4_rtl_sch.jpeg}	
+	\caption{RTL Schematic of Part 4}
+	\label{fig7}
+\end{figure}
+
+\clearpage
+
+
+\section{RESULTS [15 points]}
+\subsection{PART 1}
+The simulation results provide the truth table Table 1.
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part1.PNG}	
+	\caption{Part 1 Simulation}
+	\label{fig8}
+\end{figure}
+
+
+
+\subsection{PART 2}
+The simulation results provide the truth table Table 2.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part2.PNG}	
+	\caption{Part 2 Simulation}
+	\label{fig9}
+\end{figure}
+
+
+
+\subsection{PART 3}
+The simulation results provide the truth table Table 3. It works with clock signal as we see in 100.000th ns. Clock signal is not rising there. Therefore Q does not change even D changes. Same situation can be seen in 200.000th ns and 300.000th ns.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part3.PNG}	
+	\caption{Part 3 Simulation}
+	\label{fig10}
+\end{figure}
+
+\clearpage
+
+
+
+
+\subsection{PART 4}
+For 1/7 pulse-gap duration rate, our input was 1000000010000000.
+
+For 1/15 pulse-gap duration rate, our input was 1000000000000000.
+
+For 3/13 pulse-gap duration rate, our input was 1110000000000000.
+
+For 11/5 pulse-gap duration rate, our input was 1111111111100000.
+
+For the 1/2 frequency of clock signal, the active transitions of our clock was 16.6ns and 33.3ns.
+
+For the 1/4 frequency of clock signal, the active transitions of our clock was 10ns and 40ns.
+
+For the 1/8 frequency of clock signal, the active transitions of our clock was 5.5ns and 44.4ns.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.2f_1.7p.PNG}	
+	\caption{1/2 frequency of clock signal,1/7 pulse-gap duration rate Simulation}
+	\label{fig11}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.2f_1.15p.PNG}	
+	\caption{1/2 frequency of clock signal,1/15 pulse-gap duration rate Simulation}
+	\label{fig12}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.2f_3.13p.PNG}	
+	\caption{1/2 frequency of clock signal,3/13 pulse-gap duration rate Simulation}
+	\label{fig13}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.2f_11.5p.PNG}	
+	\caption{1/2 frequency of clock signal,11/5 pulse-gap duration rate Simulation}
+	\label{fig14}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.4f_1.7p.PNG}	
+	\caption{1/4 frequency of clock signal, 1/7 pulse-gap duration rate Simulation}
+	\label{fig15}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.4f_1.15p.PNG}	
+	\caption{1/4 frequency of clock signal, 1/15 pulse-gap duration rate Simulation}
+	\label{fig16}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.4f_3.13p.PNG}	
+	\caption{1/4 frequency of clock signal, 3/13 pulse-gap duration rate Simulation}
+	\label{fig17}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.4f_11.5p.PNG}	
+	\caption{1/4 frequency of clock signal, 11/5 pulse-gap duration rate Simulation}
+	\label{fig18}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.8f_1.7p.PNG}	
+	\caption{1/8 frequency of clock signal, 1/7 pulse-gap duration rate Simulation}
+	\label{fig19}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.8f_1.15p.PNG}	
+	\caption{1/8 frequency of clock signal, 1/15 pulse-gap duration rate Simulation}
+	\label{fig20}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.8f_3.13p.PNG}	
+	\caption{1/8 frequency of clock signal, 3/13 pulse-gap duration rate Simulation}
+	\label{fig21}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{sim_part4_1.8f_11.5p.PNG}	
+	\caption{1/8 frequency of clock signal, 11/5 pulse-gap duration rate Simulation}
+	\label{fig22}
+\end{figure}
+
+\clearpage
+
+
+
+\section{DISCUSSION [25 points]}
+\textbf{In Part 1}, we implemented an SR Latch module with S and R inputs and with Q and \((Q_N)\) outputs without an Enable input using NAND Gates. We used 4 NAND Gates.  In our code, their names are NAND1, NAND2, NAND3, NAND4. NAND 1 and NAND 2  are for complementing inputs. NAND3 takes \((Q_N)\)  and S' as inputs, gives Q as output. NAND4 takes Q  and R' as inputs, gives \((Q_N)\) as output.
+\\
+\\
+\textbf{In Part 2}, we implemented an SR Latch module with S and R inputs and with Q and \((Q_N)\) outputs with an Enable input using NAND Gates. We used 4 NAND Gates.  In our code, their names are NAND1, NAND2, NAND3, NAND4. NAND 1 is for combining S with Enable and NAND2 is for combining R with Enable. NAND3 takes \((Q_N)\)  and the output of NAND1 as inputs, then gives Q as output. NAND4 takes Q  and the output of NAND2 as inputs, then gives \((Q_N)\) as output.
+\\
+\\
+\textbf{In Part 3}, we firstly implemented a D latch. We had 2 inputs: D respresenting delay and E representing enable. We used 5 NAND gates. In NAND1, we took D and E as inputs. Output of NAND1 was one of the inputs of NAND4, other input was \((Q_N)\). NAND4’s output is Q. In NAND2, we took the complement of D: D’. D’ and E was the inputs for NAND3. NAND3’s output was the input for NAND5, other input was Q. NAND5’s output is \((Q_N)\).
+Then, we implemented a positive edge triggered D flip-flop using 2 D latches and 1 NOT gate. We had 2 inputs, D representing delay and CLK representing clock. In the NOT gate, we took the complement of CLK: CLK’. In our first D latch, our inputs were D and CLK’. From this latch we obtained \((Q_m)\), which we used as an input in the second D latch. The other input in the second D latch was CLK, and the outputs are Q and \((Q_N)\).
+\\
+\\
+\textbf{In Part 3}, we implemented a positive edge triggered pulse generator using a circular shift register. We had 3 inputs: LOAD representing load flag, CLK representing clock, and 16-bit input for the loaded value. In this module, we used an always block sensitive to the rising edge of the clock. When the load flag is 1, the 16-bit input value is loaded to a register, output 2. Output 2 exists because the module’s final output should be only 1-bit whereas we work with a 16-bit input. Then the most significant bit of the input is loaded into output1. When the load flag is 0, the module does the circular shift operation. Another register, most\_significant\_bit is defined as the last bit of output 2. Then, output 2 shifts to the left logically (<< operator is used). The first bit of output 2 and the output 1 is now the most significant bit. The reason we defined output1, output2 and most\_significant\_bit as register is because only the reg data type can be updated in always blocks.
+
+
+
+\section{CONCLUSION [10 points]}
+In this experiment, we learned how to implement and examine data storage elements such as latches and flip-flops using Verilog. We learned implementing SR Latch, D Flip Flop, pulse generator, and shift register.  Also, we learned to use "if" block and "always" block in Verilog.
+
+
+
+\end{document}
+
